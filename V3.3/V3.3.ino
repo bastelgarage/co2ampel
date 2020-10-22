@@ -9,8 +9,7 @@
  ** Datum: 19.10.2020                                                                     **
  ** Version: 3.3                                                                         **
  *******************************************************************************************
- Creative Commons Namensnennung - Nicht-kommerziell - 
- Weitergabe unter gleichen Bedingungen 4.0 International Lizenz.*/
+MIT License
  
 #include <Adafruit_NeoPixel.h>
 #include <Wire.h>
