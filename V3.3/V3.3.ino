@@ -7,7 +7,7 @@
  **                                                                                       **
  ** Autor: Alf Müller                                                                     **
  ** Datum: 19.10.2020                                                                     **
- ** Version: 3.2                                                                          **
+ ** Version: 3.3                                                                         **
  *******************************************************************************************
  Creative Commons Namensnennung - Nicht-kommerziell - 
  Weitergabe unter gleichen Bedingungen 4.0 International Lizenz.*/
