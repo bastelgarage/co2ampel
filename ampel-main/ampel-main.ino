@@ -8,7 +8,7 @@
  **                                                                                       **
  ** Author: Alf Müller                                                                    **
  ** Date:  18.11.2020                                                                     **
- ** Version: 4.2                                                                          **
+ ** Version: 4.3-dev                                                                      **
  ** License: MIT                                                                          **
  ******************************************************************************************/
 
@@ -69,9 +69,8 @@ RunningMedian luftfeuchte = RunningMedian(5);
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Infos unter www.co2ampel.ch Software V4.2.beta");
+  Serial.println("Infos unter www.co2ampel.ch Software 4.2-dev");
   delay(1000);
-  Serial.println("Infos unter www.co2ampel.ch Software V4.2.beta");
   Wire.begin();
   if (airSensor.begin(Wire, false) == false) // Disable the auto-calibration
   {
