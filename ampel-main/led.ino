@@ -88,7 +88,6 @@ void makeled() {
   }
 }
 
-
 void pixeltest() {
   pixels.clear();
   pixels.setPixelColor(6, 0, 255, 0);
@@ -108,15 +107,14 @@ void pixeltest() {
 }
 
 void menulight() {
-
   if (menuselect == 1) {
     pixels.clear();
-    for ( int i = 0; i < NUMPIXELS; i++) { //all blue for calibration
+    for ( int i = 0; i < NUMPIXELS; i++) { // All blue for calibration
       pixels.setPixelColor(i, 0, 0, 255);
       pixels.show();
     }
   }
-  if (menuselect == 2) { // all green for Wifi select
+  if (menuselect == 2) { // All green for Wifi select
     pixels.clear();
     for ( int i = 0; i < NUMPIXELS; i++) {
       pixels.setPixelColor(i, 0, 255, 0);

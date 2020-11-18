@@ -5,43 +5,43 @@ void makecalibrate() {
   Serial.print("Start SCD 30 calibration, please wait 30 s ...");
   pixels.setBrightness(220);
   pixels.clear();
-  for ( int i = 6; i < NUMPIXELS; i++) { //all blue for calibration
+  for ( int i = 6; i < NUMPIXELS; i++) { // All blue for calibration
     pixels.setPixelColor(i, 0, 0, 255);
     pixels.show();
   }
   delay(5000);
   pixels.clear();
-  for ( int i = 7; i < NUMPIXELS; i++) { //all blue for calibration
+  for ( int i = 7; i < NUMPIXELS; i++) { // All blue for calibration
     pixels.setPixelColor(i, 0, 0, 255);
     pixels.show();
   }
   delay(5000);
   pixels.clear();
-  for ( int i = 8; i < NUMPIXELS; i++) { //all blue for calibration
+  for ( int i = 8; i < NUMPIXELS; i++) { // All blue for calibration
     pixels.setPixelColor(i, 0, 0, 255);
     pixels.show();
   }
   delay(5000);
   pixels.clear();
-  for ( int i = 9; i < NUMPIXELS; i++) { //all blue for calibration
+  for ( int i = 9; i < NUMPIXELS; i++) { // All blue for calibration
     pixels.setPixelColor(i, 0, 0, 255);
     pixels.show();
   }
   delay(5000);
   pixels.clear();
-  for ( int i = 10; i < NUMPIXELS; i++) { //all blue for calibration
+  for ( int i = 10; i < NUMPIXELS; i++) { // All blue for calibration
     pixels.setPixelColor(i, 0, 0, 255);
     pixels.show();
   }
   delay(5000);
   pixels.clear();
-  for ( int i = 11; i < NUMPIXELS; i++) { //all blue for calibration
+  for ( int i = 11; i < NUMPIXELS; i++) { // All blue for calibration
     pixels.setPixelColor(i, 0, 0, 255);
     pixels.show();
   }
   delay(5000);
-  Serial.println("calibration done");
-  Serial.println("reboot Device");
+  Serial.println("Calibration done");
+  Serial.println("Reboot device");
   ESP.reset();
   delay(5000);
 }

@@ -1,6 +1,6 @@
 void buttonpressed() {
-  //counts 10 seconds the pressed buttons and then does something
-  if (menuselect == 0) { // pressed the first time
+  // Counts 10 seconds the pressed buttons and then does something
+  if (menuselect == 0) { // Pressed the first time
     previousMillisButton = millis();
     menuselect = 1;
     pixels.setBrightness(220);
@@ -16,14 +16,14 @@ void buttonpressed() {
 }
 
 void checkmenu() {
-  if (millis() - previousMillisButton >= periodbutton) { // the period has elapsed
+  if (millis() - previousMillisButton >= periodbutton) { // The period has elapsed
     switch (menuselect) {
-      case 1: //the button was pressed 1 time it is calibrated
-        menuselect = 0; //reset menu
+      case 1: // The button was pressed one time, starts calibration
+        menuselect = 0; // Reset menu
         makecalibrate();
         break;
-      case 2: // the button was pressed 3 times wifi starts
-        menuselect = 0; //reset menu
+      case 2: // The button was pressed two times, starts Wifi
+        menuselect = 0; // Reset menu
         makewifi();
         break;
       default:
