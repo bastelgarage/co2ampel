@@ -1,29 +1,15 @@
-# co2ampel
-www.co2ampel.ch
+# CO2-Ampel 
 
-Here you can find the program code for our CO2 traffic light which we offer for sale on the website www.co2ampel.ch.
+The CO2-Ampel or CO2 traffic light detects the CO2 level in the surrounding air. A [Sensirion SCD30](https://www.bastelgarage.ch/arduino/co2-sensor-scd30-sensirion) sensor is used to measure the CO2 level and current level is shown in a traffic light-manner.
 
-V4.2 
+Here you can find the program code for the CO2 traffic light and add-ons.
 
-New:
-Forced calibration Sensirion SCD 30
+The CO2-Ampel is offered for sale at https://www.co2ampel.ch.
 
-WiFi Hotspot with URL parameter to the PHP script
+Die CO2-Ampel misst den CO2-Gehalt in der Umgebungsluft. Ein [Sensirion SCD30](https://www.bastelgarage.ch/arduino/co2-sensor-scd30-sensirion)-Sensor wird verwendet zum Bestimmen der CO2-Konzentration und die Werte in einer Art Ampel ausgegeben. 
 
-PHP/ MySQL backend for web server
+Die CO2-Ampel kann unter https://www.co2ampel.ch/ bezogen werden.
 
+Hier findest du den Programmcode zur CO2-Ampel und Erweiterungen.
 
-
-Hier findest du den Programmcode zu unserer CO2-Ampel, die wir auf der Webseite www.co2ampel.ch zum Verkauf anbieten.
-
-V4.2 
-
-Neu:
-Zwangskalibrierung Sensirion SCD 30
-
-WiFi Hotspot mit URL Paramter zum PHP Script
-
-PHP/ MySQL Backend für Webserver
-
-
-
+![CO2-Ampel ](/images/ampel-small.png)
