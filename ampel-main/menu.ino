@@ -1,5 +1,5 @@
 void buttonpressed() {
-  // Counts 10 seconds the pressed buttons and then does something
+  // Counts 10 seconds, the presses of the button and then does something
   if (menuselect == 0) { // Pressed the first time
     previousMillisButton = millis();
     menuselect = 1;
