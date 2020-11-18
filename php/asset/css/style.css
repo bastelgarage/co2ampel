@@ -1,0 +1,173 @@
+/* CSS Document */
+
+body {
+  background: #22262a !important;
+}
+
+.container{
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.navbar-brand {
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar-text.bottom {
+  margin-right: auto;
+  margin-left: auto;
+  opacity: 30%;
+    -webkit-opacity: 30%; /* for safari */
+}
+
+.math-red {
+  color: #ff3300;
+}
+
+.bg-dark{
+background-color: #171a1c !important;
+}
+
+
+.bg-warning-custom {
+  /* background-color: #332600; */
+  background-color: #2e2200;
+}
+
+.container-spacer {
+  min-height: 120px;
+}
+
+.dark-mode{
+  opacity: 70%;
+      -webkit-opacity: 70%; /* for safari */
+}
+
+.card{
+  max-width: 18rem;
+  min-width: 18rem;
+}
+
+.data{
+  /* max-width: 924px; */
+  min-width: 18rem;
+}
+
+.mb-n1 {
+  margin-bottom: 0.15rem !important;
+}
+
+
+
+/*---Media Queries --*/
+@media (max-width: 1200px) {
+  .card-body{
+    padding-top: 0px !important;
+  }
+
+}
+
+@media (max-width: 992px) {
+  .card p {
+    font-size: 80%;
+  }
+
+  .card h1 {
+    font-size: 200%;
+  }
+
+  .data p {
+    font-size: 80%;
+  }
+
+  .display-4{
+    font-size: 300%;
+  }
+
+   .card-deck {
+     margin-top: 2rem;
+     margin-bottom: 2rem;
+   }
+
+}
+
+@media (max-width: 768px) {
+  /*    DONT DELETE (From: foodonya css file)
+      
+      Well, my solution is sort of hack, but it works and I am using it.
+      1vw = 1% of viewport width
+      1vh = 1% of viewport height
+      1vmin = 1vw or 1vh, whichever is smaller
+      1vmax = 1vw or 1vh, whichever is larger
+      h1 {
+        font-size: 5.9vw;
+      }
+      h2 {
+        font-size: 3.0vh;
+      }
+      p {
+        font-size: 2vmin; (1.7vmax works well for Raja)
+      }*/
+
+  .quote p {
+    font-size: 80%;
+  }
+
+  .container.quote {
+    max-width: 18rem;
+    min-width: 18rem;
+  }
+
+  .author-bg {
+    /* background-color: #3d2d00; */
+    background-color: #332600;
+    box-shadow: 0 0px 8px 0px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  }
+
+  .author-text {
+    opacity: 20% !important;
+        -webkit-opacity: 20% !important;/* for safari */
+  }
+
+  .display-4{
+    text-align:center;
+  }
+
+  .data {
+    max-width: 18rem;
+    min-width: 18rem;
+  }
+
+  .card-deck {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .navbar.fixed-bottom{
+    font-size: 80%;
+  }
+
+  .navbar.fixed-bottom a{
+    font-size: 120%;
+  }
+
+
+}
+
+@media (max-width: 576px) {
+}
+
+@media (max-width: 500px) {
+}
+
+@media (max-width: 430px) {
+}
+
+@media (max-width: 380px) {
+}
+
+@media (max-width: 320px){
+  .navbar-text.bottom.b1{
+    padding-bottom: 0rem;
+  }
+}
