@@ -7,8 +7,11 @@ V4.2
 
 New:
 Forced calibration Sensirion SCD 30
+
 WiFi Hotspot with URL parameter to the PHP script
+
 PHP/ MySQL backend for web server
+
 
 
 Hier findest du den Programmcode zu unserer CO2-Ampel, die wir auf der Webseite www.co2ampel.ch zum Verkauf anbieten.
@@ -17,7 +20,9 @@ V4.2
 
 Neu:
 Zwangskalibrierung Sensirion SCD 30
+
 WiFi Hotspot mit URL Paramter zum PHP Script
+
 PHP/ MySQL Backend für Webserver
 
 
