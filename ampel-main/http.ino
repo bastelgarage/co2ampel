@@ -9,15 +9,15 @@ void callhttp(){
       Serial.println("http://" + String(sensorurl) + "?id=" + WiFi.macAddress() + "&c=" + co2.getMedian() +"&t=" + temperatur.getMedian() +"&h=" + luftfeuchte.getMedian() + "&l=" + licht.getMedian());
       Serial.print("[MAC]" +  WiFi.macAddress() + "\n");
       Serial.print("[HTTP] GET...\n");
-      // start connection and send HTTP header
+      // Start connection and send HTTP header
       int httpCode = http.GET();
 
-      // httpCode will be negative on error
+      // HTTP code will be negative on error
       if (httpCode > 0) {
-        // HTTP header has been send and Server response header has been handled
+        // HTTP header has been send and server response header has been handled
         Serial.printf("[HTTP] GET... code: %d\n", httpCode);
 
-        // file found at server
+        // File found at server
         if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
           String payload = http.getString();
           Serial.println(payload);

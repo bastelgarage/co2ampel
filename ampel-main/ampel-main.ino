@@ -2,35 +2,35 @@
  **                 www.bastelgarage.ch  - purecrea GmbH                                  **
  ** Der Onlineshop mit Videoanleitungen und kompletten Bausätzen für Anfänger und Profis! **
  *******************************************************************************************
- ** co2ampel.ch                                                                           **
+ ** https://www.co2ampel.ch                                                               **
+ **                                                                                       **
  ** Sensor: sensirion scd30                                                               **
  **                                                                                       **
- ** Autor: Alf Müller                                                                     **
- ** Datum: 18.11.2020                                                                     **
- ** Version: 4.2                                                                   **
- *******************************************************************************************
-  MIT Lizenz.*/
+ ** Author: Alf Müller                                                                    **
+ ** Date:  18.11.2020                                                                     **
+ ** Version: 4.2                                                                          **
+ ** License: MIT                                                                          **
+ ******************************************************************************************/
 
-#include <ESP8266WiFi.h>                     //https://github.com/esp8266/Arduino
-//needed for library
+#include <ESP8266WiFi.h>                     // https://github.com/esp8266/Arduino
 #include <DNSServer.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
-#include <WiFiManager.h>                    //https://github.com/tzapu/WiFiManager
+#include <WiFiManager.h>                    // https://github.com/tzapu/WiFiManager
 #include <Adafruit_NeoPixel.h>
 #include <Wire.h>
-#include "SparkFun_SCD30_Arduino_Library.h" //via librarymanager SparkFun_SCD30
-#include <RunningMedian.h>                  //https://github.com/RobTillaart/RunningMedian
+#include "SparkFun_SCD30_Arduino_Library.h" // via librarymanager SparkFun_SCD30
+#include <RunningMedian.h>                  // https://github.com/RobTillaart/RunningMedian
 #include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson
 #include <WiFiClient.h>
 #include <ESP8266HTTPClient.h>
 
-//Neopixel
-#define PIN D8 //NEOPIXEL ANSCHLUSS
-#define NUMPIXELS 12 // ANZAHL NEOPIXEL
+// NeoPixels
+#define PIN D8       // NeoPixels pin
+#define NUMPIXELS 12 // Number of NeoPixels
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-//sensirion scd30
+// Sensirion SCD30
 SCD30 airSensor;
 
 String outputState = "off";
@@ -38,25 +38,24 @@ char sensorurl[200] = "www.abcdefg.ch/sensor.php";
 unsigned long startMillis = 560000; //900000
 const unsigned long period = 600000;
 
-
-//flag for saving data
+// Flag for saving data
 bool shouldSaveConfig = false;
 int sensorint;
 
-//button menu
+// Button menu
 int menuselect = 0;
 int previousMillisButton;
-const unsigned long periodbutton = 10000; //Time to wait for further input
+const unsigned long periodbutton = 10000; // Time to wait for further input
 
-//callback notifying us of the need to save config
+// Callback notifying us of the need to save configuration
 void saveConfigCallback () {
-  Serial.println("Should save config");
+  Serial.println("Should save configuration");
   shouldSaveConfig = true;
 }
 
 
 int x;
-int lux; // 60-200 (luminous value of the neopixels)
+int lux; // 60-200 (Luminous value of the NeoPixels)
 int co2wert;
 int lx;
 int previousMillis;
@@ -74,34 +73,34 @@ void setup() {
   delay(1000);
   Serial.println("Infos unter www.co2ampel.ch Software V4.2.beta");
   Wire.begin();
-  if (airSensor.begin(Wire, false) == false) //disable the auto-calibration
+  if (airSensor.begin(Wire, false) == false) // Disable the auto-calibration
   {
     Serial.println("Air sensor not recognized. The sensor is defective.");
     while (1)
       ;
   }
   //airSensor.setAutoSelfCalibration(false); // Sensirion no auto calibration
-  airSensor.setMeasurementInterval(5); //seconds 2 to 1800 possible
+  airSensor.setMeasurementInterval(5); // Seconds 2 to 1800 possible
 
   pixels.begin();
   pixels.clear();
-  pixels.setBrightness(200); //Set the BRIGHTNESS to about 1/5 (max = 255)
+  pixels.setBrightness(200); // Set the brightness to about 1/5 (max = 255)
   pinMode(D3, INPUT_PULLUP);
 
-  //File system
+  // File system
   //SPIFFS.format();
 
-  //read configuration from FS json
-  Serial.println("mounting FS...");
+  // Read configuration from file system JSON
+  Serial.println("Mounting file system...");
 
   if (SPIFFS.begin()) {
-    Serial.println("mounted file system");
+    Serial.println("Mounted file system");
     if (SPIFFS.exists("/config.json")) {
       //file exists, reading and loading
-      Serial.println("reading config file");
+      Serial.println("Reading configuration file");
       File configFile = SPIFFS.open("/config.json", "r");
       if (configFile) {
-        Serial.println("opened config file");
+        Serial.println("Opened configuration file");
         size_t size = configFile.size();
         // Allocate a buffer to store contents of the file.
         std::unique_ptr<char[]> buf(new char[size]);
@@ -115,12 +114,12 @@ void setup() {
           strcpy(sensorurl, json["sensorurl"]);
           sensorint = jsonBuffer.size();
         } else {
-          Serial.println("failed to load json config");
+          Serial.println("Failed to load JSON configuration");
         }
       }
     }
   } else {
-    Serial.println("failed to mount FS");
+    Serial.println("Failed to mount file system");
   }
   if (sensorint > 5) {
     //wenn die variable sensorurl grösser 5 ist
@@ -136,7 +135,7 @@ void loop() {
   boolean btnPressed = !digitalRead(D3);
   if (btnPressed == true) {
     buttonpressed();
-    Serial.print("button pressed :");
+    Serial.print("Button pressed: ");
     Serial.println(menuselect);
     delay(300);
   }
@@ -149,22 +148,22 @@ void loop() {
     if (airSensor.dataAvailable())
     {
       co2.add(airSensor.getCO2());
-      Serial.print("co2(ppm):");
+      Serial.print("CO2 (ppm): ");
       Serial.print(co2.getMedian());
       co2wert = co2.getMedian();
 
       temperatur.add(airSensor.getTemperature());
-      Serial.print(" Temperature(C):");
+      Serial.print(" Temperature (C): ");
       Serial.print(temperatur.getMedian(), 1);
 
       luftfeuchte.add(airSensor.getHumidity());
-      Serial.print(" Humidity(C):");
+      Serial.print(" Humidity (%): ");
       Serial.print(luftfeuchte.getMedian(), 1);
 
-      Serial.print(" Light:");
+      Serial.print(" Light: ");
       Serial.print(licht.getMedian(), 0);
 
-      Serial.print(" lux:");
+      Serial.print(" Lux: ");
       Serial.print(lux);
       Serial.println();
 
@@ -183,44 +182,44 @@ void loop() {
 void makewifi() {
   pixels.setBrightness(220);
   pixels.clear();
-  for ( int i = 6; i < NUMPIXELS; i++) { // green for wifi enable
+  for ( int i = 6; i < NUMPIXELS; i++) { // Green for wifi enable
     pixels.setPixelColor(i, 0, 255, 0);
     pixels.show();
   }
-  WiFiManagerParameter custom_output("URL", "URL(kein https)", sensorurl, 200);
+  WiFiManagerParameter custom_output("URL", "URL (kein HTTPS)", sensorurl, 200);
   WiFiManager wifiManager;
-  //set config save notify callback
+  // Set configuration save notify callback
   wifiManager.setSaveConfigCallback(saveConfigCallback);
   wifiManager.addParameter(&custom_output);
   //wifiManager.resetSettings();
   wifiManager.setTimeout(120);
   wifiManager.autoConnect("co2ampel");
-  Serial.println("Connected.");
+  Serial.println("Connected");
 
   strcpy(sensorurl, custom_output.getValue());
-  //save the custom parameters to FS
+  // Save the custom parameters to FS
   if (shouldSaveConfig) {
-    Serial.println("saving config");
+    Serial.println("Saving configuration");
     DynamicJsonBuffer jsonBuffer;
     JsonObject& json = jsonBuffer.createObject();
     json["sensorurl"] = sensorurl;
 
     File configFile = SPIFFS.open("/config.json", "w");
     if (!configFile) {
-      Serial.println("failed to open config file for writing");
+      Serial.println("Failed to open config file for writing");
     }
 
     json.printTo(Serial);
     json.printTo(configFile);
     configFile.close();
-    //end save
+    // End save
   }
 
 
   if (!wifiManager.startConfigPortal("co2ampel")) {
     Serial.println("Connection failed and timeout reached");
     delay(3000);
-    //reset and try again, or maybe put it to deep sleep
+    // Reset and try again, or maybe put it to deep sleep
     ESP.reset();
     delay(5000);
   }
