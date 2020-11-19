@@ -26,6 +26,8 @@ $ sudo python server.py
 
 At the moment you can't set the port where your server is running. Only 80 is supported by the CO2-Ampel.
 
+![Python backend](https://raw.githubusercontent.com/bastelgarage/co2ampel/master/images/python-backend.png)
+
 ## Testing
 
 To test if the server is able to get the data, use `httpie` or `curl` to create a request. 
