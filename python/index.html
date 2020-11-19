@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>CO2-Ampel Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+</head>
+
+<script>
+    setTimeout(function () {
+        window.location.reload(1);
+    }, 10000);
+</script>
+
+<body>
+    <div class="container centered">
+        <h1 class="text-center" style="margin-top: 5%;">CO2-Ampel Dashboard</h1>
+        <div class="columns" style="margin-left: 15%; margin-right: 15%;">
+            {% for sensor,data in sensors.items() %}
+            <div class="column col-4 text-center">
+                <div class="card mt-2">
+                    <div class="card-header bg-gray">
+                        <div class="card-title">
+                            <h5>{{ sensor }}</h5> {{sensor[timestamp]}}
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>CO2: <span>{{ data.co2 }} ppm</span></p>
+                        <p>Temperature: <span>{{ data.temperature}} °C</span></p>
+                        <p>Humidity: <span>{{ data.humidity }} %</span></p>
+                        <p>Brightness: <span>{{ data.brightness }}</span></p>
+
+                    </div>
+                </div>
+            </div> 
+            {% endfor %}
+        </div>
+    </div>
+    <footer></footer>
+</body>
