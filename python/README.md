@@ -31,5 +31,5 @@ At the moment you can't set the port where your server is running. Only 80 is su
 To test if the server is able to get the data, use `httpie` or `curl` to create a request. 
 
 ```bash
-http --form POST http://192.168.1.2/co2ampel id=B4:E7:2D:5A:52:85 c=1 t=2 h=3 l=4
+http --form POST http://192.168.1.2/co2ampel id=39:64:d5:04:08:56 c=1050 t=22.1 h=50 l=390
 ```
