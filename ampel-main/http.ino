@@ -1,6 +1,13 @@
 void callhttp(){
 
-    if (millis() - startMillis >= period)  // the period has elapsed
+    // Calculate difference to previously stored CO2 value
+    float diff = 0;
+    int co2wert = co2.getMedian();
+    if (co2wert != 0) {
+      diff = (float)(abs(co2wert - previousCO2)) / co2wert *100;
+    }
+    
+    if ( (millis() - startMillis >= period) || (diff >= 5) )  // the period has elapsed OR the change is larger 5 percent
   {
     WiFiClient client;
     HTTPClient http;
@@ -32,5 +39,6 @@ void callhttp(){
       Serial.printf("[HTTP} Unable to connect\n");
     }
     startMillis = millis();
+    previousCO2 = co2.getMedian(); // store CO2 for later loops
   }
 }

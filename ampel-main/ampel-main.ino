@@ -21,7 +21,7 @@
 #include <Wire.h>
 #include "SparkFun_SCD30_Arduino_Library.h" // via librarymanager SparkFun_SCD30
 #include <RunningMedian.h>                  // https://github.com/RobTillaart/RunningMedian
-#include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson
+#include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson // NEEDS v5.x not working with 6.x
 #include <WiFiClient.h>
 #include <ESP8266HTTPClient.h>
 
@@ -36,7 +36,7 @@ SCD30 airSensor;
 String outputState = "off";
 char sensorurl[200] = "www.abcdefg.ch/sensor.php";
 unsigned long startMillis = 560000; //900000
-const unsigned long period = 600000;
+const unsigned long period = 10*60*1000; // data logging interval in ms
 
 // Flag for saving data
 bool shouldSaveConfig = false;
@@ -59,6 +59,7 @@ int lux; // 60-200 (Luminous value of the NeoPixels)
 int co2wert;
 int lx;
 int previousMillis;
+int previousCO2 = 0;
 int interval = 1500; // Flashing time
 int ledcheck = 0;
 
