@@ -17,7 +17,7 @@
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 #include <WiFiManager.h>                    // https://github.com/tzapu/WiFiManager
-#include <Adafruit_NeoPixel.h>
+#include <Adafruit_NeoPixel.h>              // https://github.com/adafruit/Adafruit_NeoPixel_ZeroDMA
 #include <Wire.h>
 #include "SparkFun_SCD30_Arduino_Library.h" // via librarymanager SparkFun_SCD30
 #include <RunningMedian.h>                  // https://github.com/RobTillaart/RunningMedian
