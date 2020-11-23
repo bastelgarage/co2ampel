@@ -69,7 +69,7 @@ RunningMedian luftfeuchte = RunningMedian(5);
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Infos unter www.co2ampel.ch Software 4.2-dev");
+  Serial.println("Infos unter www.co2ampel.ch Software 4.3-dev");
   delay(1000);
   Wire.begin();
   if (airSensor.begin(Wire, false) == false) // Disable the auto-calibration
