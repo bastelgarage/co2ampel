@@ -17,5 +17,8 @@ jobs:
         uses: DoozyX/clang-format-lint-action@v0.11
         with:
           # Source folder to check formatting
-          source: ampel-main, testing/
-          extensions: 'ino,h'
+          source: ampel-main/, testing/
+          extensions: ino, h
+    - uses: actions/setup-python@v1
+    - run: pip install cpplint
+    - run: cpplint --recursive
