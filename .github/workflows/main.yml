@@ -6,10 +6,10 @@ jobs:
   test-matrix:
     strategy:
       matrix:
-        arduino-platform: ["arduino:samd"]
+        arduino-platform: ["esp8266:esp8266"]
         include:
-          - arduino-platform: "arduino:samd"
-            fqbn: "arduino:samd:nano_33_iot"
+          - arduino-platform: "esp8266:esp8266"
+            fqbn: "esp8266:esp8266:nodemcu"
 
     runs-on: ubuntu-latest
     steps:
@@ -20,6 +20,9 @@ jobs:
       - name: Install platform
         run: |
           arduino-cli core update-index
+          arduino-cli core install arduino:avr@1.8.2
+        
+                
           arduino-cli core install ${{ matrix.arduino-platform }}
       - name: Compile the sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./ampel-main
