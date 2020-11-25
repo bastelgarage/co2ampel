@@ -6,8 +6,8 @@
  **                                                                                       **
  ** Sensor: sensirion scd30                                                               **
  **                                                                                       **
- ** Author: Alf Müller                                                                    **
- ** Date:  18.11.2020                                                                     **
+ ** Author:  Alf Müller                                                                   **
+ ** Date:    18.11.2020                                                                   **
  ** Version: 4.3-dev                                                                      **
  ** License: MIT                                                                          **
  ******************************************************************************************/
@@ -69,7 +69,9 @@ RunningMedian luftfeuchte = RunningMedian(5);
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Infos unter www.co2ampel.ch Software 4.3-dev");
+  Serial.println("Further details can be found at https://www.co2ampel.ch");
+  Serial.println("Firmware release: 4.3-dev");
+  Serial.println("Please report issues at https://github.com/bastelgarage/co2ampel/issues");
   delay(1000);
   Wire.begin();
   if (airSensor.begin(Wire, false) == false) // Disable the auto-calibration
