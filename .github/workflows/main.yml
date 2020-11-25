@@ -6,10 +6,10 @@ jobs:
   test-matrix:
     strategy:
       matrix:
-        arduino-platform: ["arduino:8266"]
+        arduino-platform: ["arduino:esp8266"]
         include:
-          - arduino-platform: "arduino:8266"
-            fqbn: "arduino:8266:nodemcu"
+          - arduino-platform: "arduino:esp8266"
+            fqbn: "arduino:esp8266:nodemcu"
 
     runs-on: ubuntu-latest
     steps:
