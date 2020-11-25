@@ -30,3 +30,8 @@ jobs:
           arduino-cli lib install "SparkFun SCD30 Arduino Library"
       - name: Compile the sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./ampel-main
+      - name: Upload the firmware as srtifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: co2ampel
+          path: ampel-main.*
