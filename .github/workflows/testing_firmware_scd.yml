@@ -1,0 +1,38 @@
+name: testing_firmware_scd
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  test-matrix:
+    strategy:
+      matrix:
+        arduino-platform: ["esp8266:esp8266"]
+        include:
+          - arduino-platform: "esp8266:esp8266"
+            fqbn: "esp8266:esp8266:nodemcu"
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@master
+      - name: Set up the Arduino CLI
+        uses: arduino/setup-arduino-cli@v1.1.1
+      - name: Install platform
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install ${{ matrix.arduino-platform }} --additional-urls http://arduino.esp8266.com/stable/package_esp8266com_index.json
+      - name: Install dependencies
+        run: |
+          arduino-cli lib install "SparkFun SCD30 Arduino Library"
+      - name: Compile the sketch
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./testing/scd30 --output-dir .
+      - name: Upload a build firmware
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: firmware-scd30
+          path: .
