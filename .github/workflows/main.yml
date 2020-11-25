@@ -21,5 +21,12 @@ jobs:
         run: |
           arduino-cli core update-index
           arduino-cli core install ${{ matrix.arduino-platform }} --additional-urls http://arduino.esp8266.com/stable/package_esp8266com_index.json
+      - name: Install dependencies
+        run: |
+          arduino-cli lib install WiFiManager
+          arduino-cli lib install RunningMedian
+          arduino-cli lib install ArduinoJson
+          arduino-cli lib install "Adafruit NeoPixel"
+          arduino-cli lib install "SparkFun SCD30 Arduino Library"
       - name: Compile the sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./ampel-main
