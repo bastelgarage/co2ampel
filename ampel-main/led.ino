@@ -1,9 +1,17 @@
 void makeled() {
   if (menuselect == 0) {
-    if (co2wert >= 0 && co2wert <= 800) {
+    if (co2wert >= 0 && co2wert <= 700) {
 
       pixels.clear();
       pixels.setPixelColor(6, 0, 255, 0);
+      pixels.setPixelColor(4, 0, 255, 0);
+      pixels.setPixelColor(5, 0, 255, 0);
+      pixels.show();
+
+    } else if (co2wert > 700 && co2wert <= 800) {
+      pixels.clear();
+      pixels.setPixelColor(6, 0, 255, 0);
+      pixels.setPixelColor(7, 0, 255, 0);
       pixels.setPixelColor(4, 0, 255, 0);
       pixels.setPixelColor(5, 0, 255, 0);
       pixels.show();
@@ -12,20 +20,12 @@ void makeled() {
       pixels.clear();
       pixels.setPixelColor(6, 0, 255, 0);
       pixels.setPixelColor(7, 0, 255, 0);
-      pixels.setPixelColor(4, 0, 255, 0);
-      pixels.setPixelColor(5, 0, 255, 0);
-      pixels.show();
-
-    } else if (co2wert > 900 && co2wert <= 1000) {
-      pixels.clear();
-      pixels.setPixelColor(6, 0, 255, 0);
-      pixels.setPixelColor(7, 0, 255, 0);
       pixels.setPixelColor(8, 255, 255, 0);
       pixels.setPixelColor(2, 255, 255, 0);
       pixels.setPixelColor(3, 255, 255, 0);
       pixels.show();
 
-    } else if (co2wert > 1000 && co2wert <= 1100) {
+    } else if (co2wert > 900 && co2wert <= 1000) {
       pixels.clear();
       pixels.setPixelColor(6, 0, 255, 0);
       pixels.setPixelColor(7, 0, 255, 0);
@@ -35,7 +35,7 @@ void makeled() {
       pixels.setPixelColor(3, 255, 255, 0);
       pixels.show();
 
-    } else if (co2wert > 1100 && co2wert <= 1200) {
+    } else if (co2wert > 1000 && co2wert <= 1100) {
       pixels.clear();
       pixels.setPixelColor(6, 0, 255, 0);
       pixels.setPixelColor(7, 0, 255, 0);
@@ -88,6 +88,7 @@ void makeled() {
   }
 }
 
+
 void pixeltest() {
   pixels.clear();
   pixels.setPixelColor(6, 0, 255, 0);
@@ -107,14 +108,15 @@ void pixeltest() {
 }
 
 void menulight() {
+
   if (menuselect == 1) {
     pixels.clear();
-    for ( int i = 0; i < NUMPIXELS; i++) { // All blue for calibration
+    for ( int i = 0; i < NUMPIXELS; i++) { //all blue for calibration
       pixels.setPixelColor(i, 0, 0, 255);
       pixels.show();
     }
   }
-  if (menuselect == 2) { // All green for Wifi select
+  if (menuselect == 2) { // all green for Wifi select
     pixels.clear();
     for ( int i = 0; i < NUMPIXELS; i++) {
       pixels.setPixelColor(i, 0, 255, 0);
