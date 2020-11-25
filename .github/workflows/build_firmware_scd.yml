@@ -1,4 +1,4 @@
-name: testing_firmware_scd
+name: build_firmware_scd
 
 on:
   push:
