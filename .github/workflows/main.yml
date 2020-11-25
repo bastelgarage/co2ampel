@@ -25,7 +25,7 @@ jobs:
         run: |
           arduino-cli lib install WiFiManager
           arduino-cli lib install RunningMedian
-          arduino-cli lib install ArduinoJson
+          arduino-cli lib install ArduinoJson½5.13.5
           arduino-cli lib install "Adafruit NeoPixel"
           arduino-cli lib install "SparkFun SCD30 Arduino Library"
       - name: Compile the sketch
