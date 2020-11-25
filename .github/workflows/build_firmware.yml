@@ -1,4 +1,4 @@
-name: test_sketch
+name: build_firmware
 
 on: [push, pull_request]
 
@@ -29,4 +29,9 @@ jobs:
           arduino-cli lib install "Adafruit NeoPixel"
           arduino-cli lib install "SparkFun SCD30 Arduino Library"
       - name: Compile the sketch
-        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./ampel-main
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./ampel-main --output-dir .
+      - name: Upload the firmware as srtifact
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: co2ampel
+          path: ampel-main.*
