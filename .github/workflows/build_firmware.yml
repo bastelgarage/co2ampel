@@ -1,4 +1,4 @@
-name: test_sketch
+name: build_firmware
 
 on: [push, pull_request]
 
