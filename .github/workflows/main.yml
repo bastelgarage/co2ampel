@@ -20,9 +20,6 @@ jobs:
       - name: Install platform
         run: |
           arduino-cli core update-index
-          arduino-cli core install arduino:avr@1.8.2
-        
-                
           arduino-cli core install ${{ matrix.arduino-platform }}
       - name: Compile the sketch
         run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./ampel-main
