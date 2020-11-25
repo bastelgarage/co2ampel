@@ -1,0 +1,25 @@
+name: test_sketch
+
+on: [push, pull_request]
+
+jobs:
+  test-matrix:
+    strategy:
+      matrix:
+        arduino-platform: ["arduino:8266"]
+        include:
+          - arduino-platform: "arduino:8266"
+            fqbn: "arduino:8266:nodemcu"
+
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository content
+        uses: actions/checkout@master
+      - name: Set up the Arduino CLI
+        uses: arduino/setup-arduino-cli@v1.0.0
+      - name: Install platform
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install ${{ matrix.arduino-platform }}
+      - name: Compile the sketch
+        run: arduino-cli compile --fqbn ${{ matrix.fqbn }} ./blink
