@@ -6,10 +6,10 @@ jobs:
   test-matrix:
     strategy:
       matrix:
-        arduino-platform: ["arduino:esp8266"]
+        arduino-platform: ["arduino:samd"]
         include:
-          - arduino-platform: "arduino:esp8266"
-            fqbn: "arduino:esp8266:nodemcu"
+          - arduino-platform: "arduino:samd"
+            fqbn: "arduino:samd:nano_33_iot"
 
     runs-on: ubuntu-latest
     steps:
