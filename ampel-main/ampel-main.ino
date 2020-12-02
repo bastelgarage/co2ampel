@@ -58,6 +58,7 @@ int lux; // 60-200 (Luminous value of the NeoPixels)
 int co2wert;
 int lx;
 int previousMillis;
+int previousCO2 = 0;
 int interval = 1500; // Flashing time
 int ledcheck = 0;
 
