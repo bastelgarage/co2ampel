@@ -7,8 +7,8 @@
  ** Sensor: sensirion scd30                                                               **
  **                                                                                       **
  ** Author:  Alf Müller                                                                   **
- ** Date:    18.11.2020                                                                   **
- ** Version: 4.3-dev                                                                      **
+ ** Date:    02.12.2020                                                                   **
+ ** Version: 4.3                                                                          **
  ** License: MIT                                                                          **
  ******************************************************************************************/
 
@@ -69,8 +69,10 @@ RunningMedian luftfeuchte = RunningMedian(5);
 
 void setup() {
   Serial.begin(115200);
+  Serial.println("");
+  Serial.println("");
   Serial.println("Further details can be found at https://www.co2ampel.ch");
-  Serial.println("Firmware release: 4.3-dev");
+  Serial.println("Firmware release: 4.3");
   Serial.println("Please report issues at https://github.com/bastelgarage/co2ampel/issues");
   delay(1000);
   Wire.begin();
