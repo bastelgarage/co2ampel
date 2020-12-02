@@ -69,7 +69,10 @@ void makeled() {
         pixels.setPixelColor(10, 255, 0, 0);
         pixels.setPixelColor(11, 255, 0, 0);
         pixels.show();
-        previousMillis = millis();
+        if (millis() - previousMillis > 2 * interval)
+        {
+          previousMillis = millis();
+	    }
       } else {
         pixels.clear();
         pixels.setPixelColor(6, 0, 255, 0);
