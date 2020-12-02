@@ -171,6 +171,9 @@ void loop() {
       lichtwert();
       delay(100);
       callhttp();
+    }else{
+      Serial.print(".");
+       delay(400);
     }
   } else {
     menulight();
