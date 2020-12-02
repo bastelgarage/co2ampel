@@ -34,7 +34,7 @@ Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 SCD30 airSensor;
 
 String outputState = "off";
-char sensorurl[200] = "www.abcdefg.ch/sensor.php";
+char sensorurl[200] = "www.mydomain.tld/sensor.php";
 unsigned long startMillis = 560000; //900000
 const unsigned long period = 600000;
 
