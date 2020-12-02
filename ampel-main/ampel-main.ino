@@ -21,7 +21,7 @@
 #include <Wire.h>
 #include "SparkFun_SCD30_Arduino_Library.h" // via librarymanager SparkFun_SCD30
 #include <RunningMedian.h>                  // https://github.com/RobTillaart/RunningMedian
-#include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson
+#include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson (Version 5.10.0 only)
 #include <ESP8266HTTPClient.h>
 
 // NeoPixels
