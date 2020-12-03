@@ -8,7 +8,7 @@
  **                                                                                       **
  ** Author:  Alf Müller                                                                   **
  ** Date:    02.12.2020                                                                   **
- ** Version: 4.3                                                                          **
+ ** Version: 4.4-dev                                                                      **
  ** License: MIT                                                                          **
  ******************************************************************************************/
 
@@ -71,7 +71,7 @@ void setup() {
   Serial.println("");
   Serial.println("");
   Serial.println("Further details can be found at https://www.co2ampel.ch");
-  Serial.println("Firmware release: 4.3");
+  Serial.println("Firmware release: 4.4-dev");
   Serial.println("Please report issues at https://github.com/bastelgarage/co2ampel/issues");
   delay(1000);
   Wire.begin();
