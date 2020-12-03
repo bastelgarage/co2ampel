@@ -42,7 +42,7 @@ void loop() {
 }
 
 void pixel_loop() {
-  Serial.println("Go through al LEDs");
+  Serial.println("Cycle through all LEDs");
   for (int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, pixels.Color(255, 0, 0));
     pixels.show();
