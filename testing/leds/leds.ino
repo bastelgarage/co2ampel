@@ -7,8 +7,8 @@
  **                                                                                       **
  **                                                                                       **
  ** Author:  Fabian Affolter                                                              **
- ** Date:    2020-11-20                                                                   **
- ** Version: 0.2                                                                          **
+ ** Date:    2020-12-03                                                                   **
+ ** Version: 0.3                                                                          **
  ** License: MIT                                                                          **
  ******************************************************************************************/
 
@@ -28,14 +28,36 @@ void setup() {
 
   pixels.begin();
   pixels.clear();
-  pixels.setBrightness(100);  // Set the brightness to about 1/5 (max = 255)
+  pixels.setBrightness(50);  // Set the brightness to about 1/5 (max = 255)
 }
 
 void loop() {
+  pixels.clear();
+  pixel_loop();
   pixel_test();
   smiley_green();
   smiley_orange();
   smiley_red();
+  pixel_bar();
+}
+
+void pixel_loop() {
+  Serial.println("Go through al LEDs");
+  for (int i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(255, 0, 0));
+    pixels.show();
+    delay(250);
+  }
+  for (int i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(0, 255, 0));
+    pixels.show();
+    delay(250);
+  }
+  for (int i = 0; i < NUMPIXELS; i++) {
+    pixels.setPixelColor(i, pixels.Color(0, 0, 255));
+    pixels.show();
+    delay(250);
+  }
 }
 
 void pixel_test() {
@@ -60,26 +82,50 @@ void pixel_test() {
 void smiley_green() {
   Serial.println("Show the green smiley for 5 seconds");
   pixels.clear();
-  pixels.setPixelColor(6, 0, 255, 0);
+  pixels.setPixelColor(4, 0, 255, 0);
   pixels.setPixelColor(5, 0, 255, 0);
   pixels.show();
-  delay(5000);
+  delay(2000);
 }
 
 void smiley_orange() {
   Serial.println("Show the orange smiley for 5 seconds");
   pixels.clear();
-  pixels.setPixelColor(8, 0, 255, 0);
-  pixels.setPixelColor(9, 0, 255, 0);
+  pixels.setPixelColor(2, 255, 255, 0);
+  pixels.setPixelColor(3, 255, 255, 0);
   pixels.show();
-  delay(5000);
+  delay(2000);
 }
 
 void smiley_red() {
   Serial.println("Show the orange smiley for 5 seconds");
   pixels.clear();
-  pixels.setPixelColor(10, 0, 255, 0);
-  pixels.setPixelColor(11, 0, 255, 0);
+  pixels.setPixelColor(0, 255, 0, 0);
+  pixels.setPixelColor(1, 255, 0, 0);
   pixels.show();
-  delay(5000);
+  delay(2000);
+}
+
+void pixel_bar() {
+  Serial.println("Show the bar");
+  pixels.clear();
+  pixels.setPixelColor(6, 0, 255, 0);
+  pixels.show();
+  delay(500);
+  pixels.setPixelColor(7, 0, 255, 0);
+  pixels.show();
+  delay(500);
+  pixels.setPixelColor(8, 255, 255, 0);
+  pixels.show();
+  delay(500);
+  pixels.setPixelColor(9, 255, 255, 0);
+  pixels.show();
+  delay(500);
+  pixels.setPixelColor(10, 255, 0, 0);
+  pixels.show();
+  delay(500);
+  pixels.setPixelColor(11, 255, 0, 0);
+  pixels.show();
+  delay(500);
+  pixels.clear();
 }
