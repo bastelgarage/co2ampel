@@ -7,8 +7,8 @@
  ** Sensor: sensirion scd30                                                               **
  **                                                                                       **
  ** Author:  Alf Müller                                                                   **
- ** Date:    18.11.2020                                                                   **
- ** Version: 4.3-dev                                                                      **
+ ** Date:    02.12.2020                                                                   **
+ ** Version: 4.4-dev                                                                      **
  ** License: MIT                                                                          **
  ******************************************************************************************/
 
@@ -21,8 +21,7 @@
 #include <Wire.h>
 #include "SparkFun_SCD30_Arduino_Library.h" // via librarymanager SparkFun_SCD30
 #include <RunningMedian.h>                  // https://github.com/RobTillaart/RunningMedian
-#include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson
-#include <WiFiClient.h>
+#include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson (Version 5.10.0 only)
 #include <ESP8266HTTPClient.h>
 
 // NeoPixels
@@ -34,7 +33,7 @@ Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 SCD30 airSensor;
 
 String outputState = "off";
-char sensorurl[200] = "www.abcdefg.ch/sensor.php";
+char sensorurl[200] = "www.mydomain.tld/sensor.php";
 unsigned long startMillis = 560000; //900000
 const unsigned long period = 600000;
 
@@ -69,8 +68,10 @@ RunningMedian luftfeuchte = RunningMedian(5);
 
 void setup() {
   Serial.begin(115200);
+  Serial.println("");
+  Serial.println("");
   Serial.println("Further details can be found at https://www.co2ampel.ch");
-  Serial.println("Firmware release: 4.3-dev");
+  Serial.println("Firmware release: 4.4-dev");
   Serial.println("Please report issues at https://github.com/bastelgarage/co2ampel/issues");
   delay(1000);
   Wire.begin();
@@ -172,6 +173,9 @@ void loop() {
       lichtwert();
       delay(100);
       callhttp();
+    }else{
+      Serial.print(".");
+       delay(400);
     }
   } else {
     menulight();
