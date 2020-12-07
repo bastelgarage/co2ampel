@@ -1,0 +1,29 @@
+{
+  "name": "co2ampel",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "~4.10.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "1.0.0",
+  "description": "Dashboard for the CO2-Ampel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bastelgarage/co2ampel.git"
+  },
+  "keywords": [
+    "CO2",
+    "CO2-Ampel",
+    "Air",
+    "quality"
+  ],
+  "author": "Fabian Affolter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bastelgarage/co2ampel/issues"
+  },
+  "homepage": "https://github.com/bastelgarage/co2ampel#readme"
+}
