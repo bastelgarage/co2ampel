@@ -24,7 +24,6 @@
 #include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson (Version 5.10.0 only)
 #include <ESP8266HTTPClient.h>
 #include <ESP8266mDNS.h>
-#include <PolledTimeout.h>
 
 // NeoPixels
 #define PIN D8       // NeoPixels pin
