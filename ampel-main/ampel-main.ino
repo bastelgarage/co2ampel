@@ -62,6 +62,7 @@ char*                         pcHostDomain            = 0;        // Negociated 
 bool                          bHostDomainConfirmed    = false;    // Flags the confirmation of the host domain
 MDNSResponder::hMDNSService   hMDNSService            = 0;        // The handle of the service in the MDNS responder
 ESP8266WebServer              server(SERVICE_PORT);
+bool			      bGotNet = false;
 
 int x;
 int lux; // 60-200 (Luminous value of the NeoPixels)
@@ -147,14 +148,20 @@ void setup() {
     //wenn die variable sensorurl grösser 5 ist
     Serial.println("Activating WIFI");
     WiFiManager wifiManager;
-    while (WiFi.status() != WL_CONNECTED) {
+    for (int maxWait=0;maxWait<10;maxWait++) {
+      if (WiFi.status() == WL_CONNECTED) {
+	bGotNet = true;
+	break;
+      }
       delay(500);
       Serial.print(".");
     }
-    Serial.println("");
-    Serial.print("IP address: ");
-    Serial.println(WiFi.localIP());
-    setupMDNS();
+    if (bGotNet) {
+       Serial.println("");
+       Serial.print("IP address: ");
+       Serial.println(WiFi.localIP());
+       setupMDNS();
+    }
   }
 }
 
@@ -211,7 +218,7 @@ void loop() {
     checkmenu();
   }
   makeled();
-  if (gotWifiConfig) {
+  if (bGotNet) {
     loopMDNS();
   }
 }
