@@ -23,6 +23,7 @@
 #include <RunningMedian.h>                  // https://github.com/RobTillaart/RunningMedian
 #include <ArduinoJson.h>                    // https://github.com/bblanchon/ArduinoJson (Version 5.10.0 only)
 #include <ESP8266HTTPClient.h>
+#include <ESP8266mDNS.h>
 
 // NeoPixels
 #define PIN D8       // NeoPixels pin
@@ -34,12 +35,12 @@ SCD30 airSensor;
 
 String outputState = "off";
 char sensorurl[200] = "www.mydomain.tld/sensor.php";
+char mdnsname[200] = "my-co2ampel";
 unsigned long startMillis = 560000; //900000
 const unsigned long period = 600000;
 
 // Flag for saving data
 bool shouldSaveConfig = false;
-int sensorint;
 
 // Button menu
 int menuselect = 0;
@@ -53,6 +54,16 @@ void saveConfigCallback () {
 }
 
 
+// mDNS server
+#define SERVICE_PORT        8085    
+#define UPDATE_CYCLE        (1 * 1000)                          // every second
+
+char*                         pcHostDomain            = 0;        // Negociated host domain
+bool                          bHostDomainConfirmed    = false;    // Flags the confirmation of the host domain
+MDNSResponder::hMDNSService   hMDNSService            = 0;        // The handle of the service in the MDNS responder
+ESP8266WebServer              server(SERVICE_PORT);
+bool			      bGotNet = false;
+
 int x;
 int lux; // 60-200 (Luminous value of the NeoPixels)
 int co2wert;
@@ -65,6 +76,8 @@ RunningMedian licht = RunningMedian(5);
 RunningMedian co2 = RunningMedian(5);
 RunningMedian temperatur = RunningMedian(5);
 RunningMedian luftfeuchte = RunningMedian(5);
+
+bool gotWifiConfig = false;
 
 void setup() {
   Serial.begin(115200);
@@ -113,8 +126,16 @@ void setup() {
         json.printTo(Serial);
         if (json.success()) {
           Serial.println("\nparsed json");
-          strcpy(sensorurl, json["sensorurl"]);
-          sensorint = jsonBuffer.size();
+          const char* sensorurlJS = json["sensorurl"];
+          if (sensorurlJS != nullptr) {
+            gotWifiConfig = true;
+            strcpy(sensorurl, sensorurlJS);
+          }
+          const char* mdnsnameJS = json["mdnsname"];
+          if (mdnsnameJS != nullptr) {
+            gotWifiConfig = true;
+            strcpy(mdnsname, mdnsnameJS);
+          }
         } else {
           Serial.println("Failed to load JSON configuration");
         }
@@ -123,9 +144,24 @@ void setup() {
   } else {
     Serial.println("Failed to mount file system");
   }
-  if (sensorint > 5) {
+  if (gotWifiConfig) {
     //wenn die variable sensorurl grösser 5 ist
+    Serial.println("Activating WIFI");
     WiFiManager wifiManager;
+    for (int maxWait=0;maxWait<10;maxWait++) {
+      if (WiFi.status() == WL_CONNECTED) {
+	bGotNet = true;
+	break;
+      }
+      delay(500);
+      Serial.print(".");
+    }
+    if (bGotNet) {
+       Serial.println("");
+       Serial.print("IP address: ");
+       Serial.println(WiFi.localIP());
+       setupMDNS();
+    }
   }
 }
 
@@ -182,6 +218,9 @@ void loop() {
     checkmenu();
   }
   makeled();
+  if (bGotNet) {
+    loopMDNS();
+  }
 }
 
 void makewifi() {
@@ -192,23 +231,27 @@ void makewifi() {
     pixels.show();
   }
   WiFiManagerParameter custom_output("URL", "URL (kein HTTPS)", sensorurl, 200);
+  WiFiManagerParameter custom_mdnsname("MDNSNAME", "mDNS Name", mdnsname, 200);
   WiFiManager wifiManager;
   // Set configuration save notify callback
   wifiManager.setSaveConfigCallback(saveConfigCallback);
   wifiManager.addParameter(&custom_output);
+  wifiManager.addParameter(&custom_mdnsname);
   //wifiManager.resetSettings();
   wifiManager.setTimeout(120);
   wifiManager.autoConnect("co2ampel");
   Serial.println("Connected");
 
   strcpy(sensorurl, custom_output.getValue());
+  strcpy(mdnsname, custom_mdnsname.getValue());
+
   // Save the custom parameters to FS
   if (shouldSaveConfig) {
     Serial.println("Saving configuration");
     DynamicJsonBuffer jsonBuffer;
     JsonObject& json = jsonBuffer.createObject();
     json["sensorurl"] = sensorurl;
-
+    json["mdnsname"] = mdnsname;
     File configFile = SPIFFS.open("/config.json", "w");
     if (!configFile) {
       Serial.println("Failed to open config file for writing");
