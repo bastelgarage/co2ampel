@@ -6,11 +6,11 @@ The endpoint that is handling the sensor's data is called `co2ampel`.
 
 The following parameters are sent by the sensor:
 
-`id`: MAC address of the ESP8266
-`c`: CO2 level
-`t`: Temperature
-`h`: Humidity
-`l`: Brightness
+- `id`: MAC address of the ESP8266
+- `c`: CO2 level
+- `t`: Temperature
+- `h`: Humidity
+- `l`: Brightness
 
 ## Usage
 
