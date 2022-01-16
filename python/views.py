@@ -20,7 +20,7 @@ async def index_json(request):
 
 
 async def co2ampel_handler(request):
-    """Handle the HTTP Co2-Ampel requests."""
+    """Handle the HTTP CO2-Ampel requests."""
     parameters = await request.post()
     sensors[parameters["id"]] = {
         "timestamp": time.time(),
