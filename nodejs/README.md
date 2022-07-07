@@ -22,7 +22,7 @@ sudo node server.js
 Server started! Is running at http://localhost:80
 ```
 
-YOu can set the enviroment variable `PORT` if you want to run the server on a different port,
+You can set the enviroment variable `PORT` if you want to run the server on a different port,
 e. g., one that doesn't require you to be `root`.
 
 ## Testing
